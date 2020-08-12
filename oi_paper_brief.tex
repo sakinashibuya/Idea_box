@@ -1,0 +1,128 @@
+\documentclass[12pt]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage{enumitem}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{float} % This lets you use [H] for figure.
+\usepackage{subcaption}
+\usepackage[final]{pdfpages}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{setspace}
+\doublespacing
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\Floor\lfloor\rfloor
+\DeclarePairedDelimiter\Ceil\lceil\rceil
+\usepackage{adjustbox}
+
+
+\begin{document}
+\textbf{\underline{Summary: Gender Gaps in Agricultural Program Outcomes in Rwanda}} 
+
+\subsubsection*{\textbf{Motivation}}
+	This paper is motivated by the fact that we observe non-trivial gender differences in outcome indicators that seems to widen and narrow as the project has progressed. Figure \ref{fig:desc_trends} shows such difference over the project years. While some initial differences are observed, there seems to some other factor that may have widened these gender differences. It is also bizarre that comparison male-headed households perform better than treated female-headed households throughout the project duration. 
+	
+	\begin{figure}[H]
+		\centering
+		\caption{Gender Gaps in Agricultural Outcomes}
+		\vspace{3mm}	
+		\includegraphics[scale=0.8]{/home/sakina/Github/lwh_rwanda/oi_academic_paper/output/for_paper/graphs/trends}
+		\label{fig:desc_trends}
+	\end{figure}
+	
+\subsubsection*{Project Background}
+	The Land Husbandry, Water Harvesting and Hillside Irrigation Project for Rwanda (LWH) was implemented from 2010 to 2018. The main goal of this project is to help subsistence farming households increase and commercialize their agricultural production in order to increase their income. The project provided agricultural extension services to train farmers on new technologies and methods, offered input subsidies and radical terracing, helped form farmer organizations, and promoted production of cash crops, namely corn. The project later added savings mechanisms and extension feedback systems in the last three years of the project. 
+	
+	 The project was rolled out in three phases. Phase 1A, 1B and 1C began in 2010, 2012, and 2013, respectively on corresponding project sites. Data were collected for the 1B and 1C sites for evaluation purpose. A project site corresponded to a watershed in a valley. 
+	
+	A project site was then divided into three areas, qualified by its position relative to a proposed dam location: command areas, water catchment areas, and command area catchments. Command areas laid downstream from the proposed dam, and contained land for irrigation. Water catchment areas were upstream from the proposed dam. Command area catchments were downstream from the dam but above command areas, and were not to be irrigated. 
+ 
+\subsubsection*{Survey Design and Data}
+	Since the project was assigned based on geographical characteristics, counterfactuals were chosen through a pair-wise matching of project sites based on geographical, climatic and land-usage characteristics. Households in each treatment or comparison site were randomly chosen with stratification at the village label and interviewed repeatedly. 
+		
+	The baseline data were collected before the project implementation only for the 1B treatment and comparison sites; thus, only the 1B sites are included in this paper. The 1B baseline survey was implemented in 2012, and the follow-up surveys were conducted in 2013, 2014, 2016, and 2017. This data set is unique in that it has tracked the same farming households for five surveys on demographic characteristics, agricultural and non-agricultural production, households expenditures and consumption, and food security. Despite the non-random assignment of the project. Each survey collected data on agricultural production by season. Traditionally, there are three agricultural seasons in Rwanda. The main season (Season A) is from September to February, the secondary season (Season B) from March to June, and the dry season (Season C) from July to September. Since production barely occurs in Season C, this paper focuses on Seasons A and B.
+		
+	Table \ref{fig:balance_1B} shows the result of balance tests between households in treatment and comparison sites. Given the non-random nature of the project assignment, there are non-negligible differences between treated and comparison households. The differences in values of sales and inputs are particularly concerning. These baseline differences are controlled for in the later regression analysis. 
+
+	
+\subsubsection*{Estimation strategy}
+	
+	To capture the change in these gender differences in outcomes over time, we estimate the following regression equation;
+	
+	\begin{equation}
+	\begin{aligned}
+	y_{it} = \beta_{0} + \beta_{1}Treatment_{i} + \beta_{2}Gender_{it} + \\ \beta_{3}(Treatment_{i}*Gender_{it}*\delta_{t}) + \\
+	\beta_{4}(Treatment_{i}*\delta_{t}) + \\
+	\theta X_{i} + \alpha Z_{it} + \delta_{t}  + \omega_{j} + u_{it}, 
+	\end{aligned}
+	\end{equation}
+	
+	where $Treatment_{i}$ is a binary variable indicating the treatment assignment of each household, 
+	$Gender_{it}$ is assigned 1 if the head of each household is male at each time of the survey, $\theta X_{i}$ is a vector of baseline level household characteristics, $\delta_{t}$ represents the time variant effects, $\omega_{j}$ is the fixed effects for the two seasons, and $u_{it}$ is the error term.
+	
+\subsubsection*{Result}
+Figure \ref{fig:mainReg_graph} shows that even after controlling for baseline household characteristics (HHH age, education, number of dependents, asset, use of agricultural technologies), input expenditure, labor use, and cultivated plot size, there are non-trivial gender differences. The regression table is shown below. (Table \ref{tab:mainReg})
+
+\begin{figure}[H] 
+	\caption{Dynamics of the Gender Gaps}
+	\begin{subfigure}{\textwidth}
+		\centering
+		\includegraphics[scale=1]{/home/sakina/Github/lwh_rwanda/oi_academic_paper/output/for_paper/graphs/mainReg_graphs} 
+	\end{subfigure} 
+	\begin{subfigure}{\textwidth}
+		\begin{table}[H]
+			\centering 
+			\caption*{Means of Female-headed Households in Each Group}
+			\begin{tabular}{cccccc} \hline 
+				& 2012                                        & 2013                                        & 2014                                        & 2016                                        & 2017                                        \\ \hline 
+				\multicolumn{6}{c}{\small Harvest} \\
+				Treatment    &     55,525 &     48,213 &     72,649 &     49,106 &     93,416 \\ 
+				Comparison   &     49,852 &     61,151 &     69,654 &     39,024 &     75,913 \\ 
+				\multicolumn{6}{c}{\small Sales} \\
+				Treatment    &     20,846      &     18,915      &     30,829      &     17,827      &     31,908      \\ 
+				Comparison   &     14,179      &     23,857      &     22,991      &      9,185      &     20,653      \\ 
+				\multicolumn{6}{c}{\small Input Spending per Hectare} \\
+				Treatment    &      6,912 &     27,838 &     33,283 &     49,105 &     31,034 \\ 
+				Comparison   &      6,098 &     36,794 &     28,909 &     30,328 &     32,806 \\ 
+				\multicolumn{6}{c}{\small HH Labor} \\
+				Treatment    &     49,020        &     18,282        &     41,964        &     33,454        &     40,672        \\ 
+				Comparison   &     44,375        &     29,792        &     35,378        &     24,774        &     42,729        \\ \hline 
+			\end{tabular}
+		\end{table}
+	\end{subfigure}
+	\label{fig:mainReg_graph}
+\end{figure}
+
+
+\subsubsection*{Speculations}
+We explore potential explanations for these observed gender differences. First, we speculate that gender differences in the covariates may be driving the outcome gender differences. In order to explore this possibility, we regress each of the main outcome indicators on the treatment indicator and interaction terms of HHH gender and each of the covariates included in the above regression equation. We find that only the gender difference in household asset and input spending are statistically meaningful, although the magnitudes are quite small. 
+
+Second, it is possible that female- and male-headed households adopted agricultural techniques and made crop decisions differently. The descriptive statistics show that there is virtually not gender differences in technological adoption and crop decision.
+
+Finally, the difference in sales may be driven by differential access to market and market information by female- and male-headed households. This data set offers information on main point of sales (POS), primary means of transportation and time to main POS, difficulty of learning about prices, and where households learn about prices for 2017. Within the treatment group, both female- and male-headed households reported markets as their main POS. However, 20 percentage point more male-headed households use bicycle to get to their main POS, and their main POS are further than that of female-headed households. 
+	
+\pagebreak
+	\begin{figure}[H]
+	\caption{Balance Table}
+	\begin{adjustbox}{width=0.95 \textwidth, center}
+		\input{/home/sakina/Dropbox/DIME_work/GAFSP Rwanda/data/followup_5_endline/output/OI_report/tables/Bltest_HHlevel_1B_1.tex}
+	\end{adjustbox}
+	\label{fig:balance_1B}
+	\end{figure}
+
+	\begin{table}[H]
+	\caption{Yearly Gender Gaps in Agricultural Production}	
+	\begin{center}
+		\scalebox{0.5}{\input{/home/sakina/Github/lwh_rwanda/oi_academic_paper/output/for_paper/tables/mainReg_table.tex}}
+	\end{center}
+	\label{tab:mainReg}
+	\end{table}
+
+	
+\end{document}
